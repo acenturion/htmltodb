@@ -29,9 +29,10 @@ public class getDataFromHtml {
 
             final HtmlTable table = (HtmlTable) page.getByXPath("//table[@class='DataTable']").get(4);
 
-            for (final HtmlTableRow row : table.getRows()) {
+            for (int i = 2; i < table.getRowCount() - 1; i++) {
+                HtmlTableRow row = table.getRow(i);
                 for (final HtmlTableCell cell : row.getCells()) {
-                    //out.write(cell.asText()+",");
+
                     out.write(fromColorToNumber(cell));
                 }
                 out.write('\n');
@@ -45,7 +46,7 @@ public class getDataFromHtml {
     }
 
     public String fromColorToNumber(HtmlTableCell celda) {
-        //System.out.println(celda.asText());
+        //System.out.println(celda.asText());   
         switch (celda.asText()) {
             case "Tkt":
                 return printColor(celda);
@@ -84,6 +85,26 @@ public class getDataFromHtml {
             //countYellow++;
         }
         return celda.asText();
+    }
+
+    public void getInfoTable(String direccion) throws Exception {
+
+        FileWriter fstream = new FileWriter("prueba002.txt");
+        BufferedWriter out = new BufferedWriter(fstream);
+
+        final WebClient webClient = new WebClient();
+        final HtmlPage page = webClient.getPage(direccion);
+        final HtmlTable table = (HtmlTable) page.getByXPath("//table[@class='DataTable']").get(0);
+
+        for (int i = 1; i < 16; i++) {
+
+            out.write(table.getRows().get(i).getCell(1).asText() + ",");
+            //out.write(table.getRows().get(i).getCell(1).asText());
+
+        }
+        out.close();
+        webClient.close();
+
     }
 
 }

@@ -12,9 +12,10 @@ import htmlToDb.getDataFromHtml;
  * @author Minimal
  */
 public class testOficial {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         getDataFromHtml caca = new getDataFromHtml();
         
-        caca.getData("file:///C:/Users/Minimal/Desktop/codigo.html");
+        caca.getData("file:///C:/Users/acenturion/Desktop/regresion001.html");
+        caca.getInfoTable("file:///C:/Users/acenturion/Desktop/regresion001.html");
     }
 }

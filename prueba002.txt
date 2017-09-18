@@ -1,0 +1,1 @@
+Regresion_Full,1,Argentina,Jumbo,Prog: 2017.08.2r1,Boleta,Prog: 2017.08.2r1,2,202,mié 06 sep 2017 - 16:41,mié 06 sep 2017 - 19:55:08,Alejandro Centurion,acenturion@practia.global,G100603Ws011,Versión 17.4.3.23,

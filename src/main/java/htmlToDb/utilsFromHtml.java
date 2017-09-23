@@ -5,16 +5,20 @@
  */
 package htmlToDb;
 
+import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
+import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
+
 /**
  *
  * @author Minimal
  */
 public class utilsFromHtml {
 
-    public void fromColorToNumber(String celda) {
-        switch (celda) {
-            case "": ;
-
-        }
+    public void regresionTable(){
+        
+    }
+    
+    public static void casesTable(HtmlTableCell cell){
+        System.out.print(cell.asText()+",");
     }
 }

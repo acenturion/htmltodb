@@ -5,26 +5,22 @@
  */
 package htmlToDb;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  *
  * @author acenturion
  */
 public class FileFromHtml {
 
-    private final String direccion;
-    private static FileFromHtml fileFromHtml;
+    private static FileWriter fileFromHtml = null;
 
-    private FileFromHtml(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public static FileFromHtml getFile(String direccion) {
-        if (fileFromHtml == null) {
-            fileFromHtml = new FileFromHtml(direccion);
-        } else {
-            System.out.println("Error en el singleton");
+    public static FileWriter getInstance(String direccion) throws IOException {
+        if(fileFromHtml == null){
+            fileFromHtml = new FileWriter(direccion);
         }
-        return fileFromHtml;
+            return fileFromHtml;
     }
 
 }

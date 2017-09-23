@@ -5,13 +5,10 @@
  */
 package htmlToDb;
 
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 
 /**
  *
@@ -19,33 +16,27 @@ import java.io.FileWriter;
  */
 public class getDataFromHtml {
 
-    public void getData(String direccion) {
-        try {
-            FileWriter fstream = new FileWriter("prueba001.txt");
-            BufferedWriter out = new BufferedWriter(fstream);
+    public void getTables(HtmlPage page) {
 
-            final WebClient webClient = new WebClient();
-            final HtmlPage page = webClient.getPage(direccion);
+        String xmlTabla = "//table[@class='DataTable']";
 
-            final HtmlTable table = (HtmlTable) page.getByXPath("//table[@class='DataTable']").get(4);
-
-            for (int i = 2; i < table.getRowCount() - 1; i++) {
-                HtmlTableRow row = table.getRow(i);
-                for (final HtmlTableCell cell : row.getCells()) {
-
-                    out.write(fromColorToNumber(cell));
+        for (int i = 0; i < page.getByXPath(xmlTabla).size(); i++) {
+            HtmlTable tabla = (HtmlTable) page.getByXPath(xmlTabla).get(i);
+            for (HtmlTableRow row : tabla.getRows()) {
+                for (HtmlTableCell cell : row.getCells()) {
+                    System.out.print(cell.asText() + ",");
                 }
-                out.write('\n');
+                System.out.println("\n");
             }
-            out.close();
-            webClient.close();
-        } catch (Exception ex) {
-            System.out.println(ex);
         }
-
     }
 
-    public String fromColorToNumber(HtmlTableCell celda) {
+    public void getTable() {
+
+    }
+}
+/*
+public String fromColorToNumber(HtmlTableCell celda) {
         //System.out.println(celda.asText());   
         switch (celda.asText()) {
             case "Tkt":
@@ -107,4 +98,26 @@ public class getDataFromHtml {
 
     }
 
+    public String getInfo(HtmlPage page, int tabla) {
+
+        HtmlTable table = (HtmlTable) page.getByXPath("//table[@class='DataTable']").get(tabla);
+        if (tabla == 0) {
+            return recorrotabla(table);
+        }
+        if (tabla >= 4) {
+            return recorrotabla(table);
+        }
+        return "";
+    }
+
+    public String recorrotabla(HtmlTable tabla) {
+        for (HtmlTableRow row : tabla.getRows()) {
+            for (HtmlTableCell cell : row.getCells()) {
+                return fromColorToNumber(cell);
+            }
+            return "\n";
+        }
+        return "";
+    }
 }
+ */
